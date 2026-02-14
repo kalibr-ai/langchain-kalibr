@@ -1,0 +1,92 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "langchain-kalibr"
+version = "0.1.0"
+description = "An integration package connecting Kalibr and LangChain — adaptive model routing that learns which models work best."
+license = { text = "MIT" }
+readme = "README.md"
+authors = [{ name = "Kalibr Team", email = "support@kalibr.systems" }]
+
+requires-python = ">=3.10,<4.0"
+dependencies = [
+    "langchain-core>=0.3.0,<2.0.0",
+    "kalibr>=1.4.0",
+]
+
+keywords = [
+    "langchain",
+    "kalibr",
+    "llm",
+    "routing",
+    "adaptive",
+    "multi-model",
+    "ai",
+    "agents",
+    "openai",
+    "anthropic",
+    "google",
+    "model-routing",
+    "thompson-sampling",
+    "crewai",
+    "langgraph",
+    "model-selection",
+    "fallback",
+    "observability",
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.0.0"]
+anthropic = ["anthropic>=0.20.0"]
+google = ["google-generativeai>=0.3.0"]
+all = [
+    "openai>=1.0.0",
+    "anthropic>=0.20.0",
+    "google-generativeai>=0.3.0",
+]
+dev = [
+    "pytest>=7.3.0,<8.0.0",
+    "pytest-asyncio>=0.21.0,<1.0.0",
+    "pytest-mock>=3.10.0,<4.0.0",
+    "ruff>=0.4.0",
+    "mypy>=1.10.0",
+]
+
+[project.urls]
+Homepage = "https://kalibr.systems"
+Documentation = "https://kalibr.systems/docs"
+Repository = "https://github.com/kalibr-ai/langchain-kalibr"
+Issues = "https://github.com/kalibr-ai/langchain-kalibr/issues"
+"LangChain Docs" = "https://docs.langchain.com/oss/python/integrations/providers/kalibr"
+Dashboard = "https://dashboard.kalibr.systems"
+
+[tool.hatch.build.targets.wheel]
+packages = ["langchain_kalibr"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
+
+[tool.mypy]
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers --strict-config"
+asyncio_mode = "auto"

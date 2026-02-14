@@ -1,0 +1,50 @@
+# Kalibr
+
+> Adaptive routing for AI agents. Learns which models work best and routes automatically.
+
+Kalibr is an execution intelligence platform for AI agents. It captures telemetry from LLM calls, uses Thompson Sampling to learn which models perform best per task, and routes future requests accordingly. Unlike observability tools that show humans what happened, Kalibr's data faces the system — enabling automatic routing decisions.
+
+## Core SDK
+
+- Python: `pip install kalibr` (https://pypi.org/project/kalibr/)
+- TypeScript: `npm install @kalibr/sdk` (https://www.npmjs.com/package/@kalibr/sdk)
+
+## Integrations
+
+- LangChain: `pip install langchain-kalibr` (https://pypi.org/project/langchain-kalibr/)
+- CrewAI: `pip install kalibr[crewai]`
+- OpenAI Agents SDK: `pip install kalibr[openai-agents]`
+
+## Key API
+
+```python
+from kalibr import Router
+
+router = Router(goal="task_name", paths=["gpt-4o", "claude-sonnet-4-20250514"])
+response = router.completion(messages=[...])
+router.report(success=True)
+```
+
+## LangChain Usage
+
+```python
+from langchain_kalibr import ChatKalibr
+
+llm = ChatKalibr(goal="task_name", paths=["gpt-4o", "claude-sonnet-4-20250514"])
+chain = prompt | llm | parser
+```
+
+## Concepts
+
+- Goal: named task for routing (e.g., "summarize", "extract_email")
+- Path: model + optional tools + optional params
+- Outcome: success/failure signal that teaches routing
+- Thompson Sampling: balances exploration vs exploitation
+- Canary traffic: ~10% explores new options
+
+## Links
+
+- Dashboard: https://dashboard.kalibr.systems
+- Docs: https://kalibr.systems/docs
+- GitHub: https://github.com/kalibr-ai
+- API: https://kalibr-intelligence.fly.dev
