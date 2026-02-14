@@ -1,6 +1,6 @@
 # langchain-kalibr
 
-Execution path routing for AI agents. Kalibr routes your agents around failing models, tools, and configurations — before users notice.
+Kalibr is the first autonomous routing system for AI agents — routing to the optimal execution path (model + tool + parameters) to prevent failures, degradations, and cost spikes before they impact users. This package drops Kalibr into any LangChain chain, agent, or LangGraph workflow. Works with CrewAI natively.
 
 [![PyPI](https://img.shields.io/pypi/v/langchain-kalibr)](https://pypi.org/project/langchain-kalibr/)
 [![Python](https://img.shields.io/pypi/pyversions/langchain-kalibr)](https://pypi.org/project/langchain-kalibr/)
@@ -182,14 +182,16 @@ llm = ChatKalibr(
 
 ## How Routing Works
 
+Routing is outcome-aware. Kalibr captures step-level telemetry and success signals, canaries traffic across the paths you define, and keeps your agents on the best-performing path at all times.
+
+Observability shows you what went wrong. Kalibr prevents it from happening. It actively adapts to changing conditions as your agents run in production.
+
 **Trust invariant:** Success rate always dominates. Cost and latency only break ties between paths with comparable success rates. Kalibr never sacrifices quality for cost savings.
 
-1. **You define paths** — models (+ optional tools/params) that can handle your task
+1. **You define paths** — models, tools, and parameter configurations that can handle your task
 2. **Kalibr picks** — uses Thompson Sampling to balance trying new options vs. using what works
 3. **You report outcomes** — tell Kalibr if the task succeeded
 4. **Kalibr learns** — routes more traffic to what works, automatically routes around degradation
-
-Kalibr explores with ~10% canary traffic to continuously discover better options, while routing the majority of traffic to the best-performing path.
 
 ## API Reference
 

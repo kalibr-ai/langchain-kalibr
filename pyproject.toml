@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "langchain-kalibr"
 version = "0.1.0"
-description = "Execution path routing for AI agents. Routes around failing models, tools, and configurations automatically."
+description = "The first autonomous routing system for AI agents. Routes to the optimal execution path to prevent failures, degradations, and cost spikes before they impact users."
 license = { text = "MIT" }
 readme = "README.md"
 authors = [{ name = "Kalibr Team", email = "support@kalibr.systems" }]
