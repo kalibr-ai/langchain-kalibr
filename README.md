@@ -1,6 +1,6 @@
 # langchain-kalibr
 
-Adaptive model routing for LangChain. Kalibr learns which models (OpenAI, Anthropic, Google, etc.) work best for your tasks and routes automatically using Thompson Sampling.
+Execution path routing for AI agents. Kalibr routes your agents around failing models, tools, and configurations — before users notice.
 
 [![PyPI](https://img.shields.io/pypi/v/langchain-kalibr)](https://pypi.org/project/langchain-kalibr/)
 [![Python](https://img.shields.io/pypi/pyversions/langchain-kalibr)](https://pypi.org/project/langchain-kalibr/)
@@ -39,6 +39,7 @@ export KALIBR_API_KEY="your-api-key"
 export KALIBR_TENANT_ID="your-tenant-id"
 export OPENAI_API_KEY="sk-..."            # for OpenAI models
 export ANTHROPIC_API_KEY="sk-ant-..."     # for Anthropic models
+export GOOGLE_API_KEY=...                # for Gemini models
 ```
 
 ## Quick Start
@@ -49,7 +50,7 @@ from langchain_kalibr import ChatKalibr
 # Define models to route between
 llm = ChatKalibr(
     goal="summarize",
-    paths=["gpt-4o", "claude-sonnet-4-20250514"],
+    paths=["gpt-4o", "claude-sonnet-4-20250514", "gemini-2.0-flash"],
 )
 
 # Use like any LangChain chat model
@@ -180,6 +181,8 @@ llm = ChatKalibr(
 ```
 
 ## How Routing Works
+
+**Trust invariant:** Success rate always dominates. Cost and latency only break ties between paths with comparable success rates. Kalibr never sacrifices quality for cost savings.
 
 1. **You define paths** — models (+ optional tools/params) that can handle your task
 2. **Kalibr picks** — uses Thompson Sampling to balance trying new options vs. using what works

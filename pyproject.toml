@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 [project]
 name = "langchain-kalibr"
 version = "0.1.0"
-description = "An integration package connecting Kalibr and LangChain — adaptive model routing that learns which models work best."
+description = "Execution path routing for AI agents. Routes around failing models, tools, and configurations automatically."
 license = { text = "MIT" }
 readme = "README.md"
 authors = [{ name = "Kalibr Team", email = "support@kalibr.systems" }]
@@ -35,6 +35,9 @@ keywords = [
     "model-selection",
     "fallback",
     "observability",
+    "execution-path",
+    "path-routing",
+    "failover",
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
