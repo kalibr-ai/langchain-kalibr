@@ -100,13 +100,10 @@ response = llm.invoke("Extract the email: Contact hello@example.com for details.
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "Answer the question concisely in {language}."),
-    ("human", "{question}"),
-])
+prompt = ChatPromptTemplate.from_template("Tell me about {topic}")
 
 chain = prompt | llm | StrOutputParser()
-result = chain.invoke({"language": "English", "question": "What is Thompson Sampling?"})
+result = chain.invoke({"topic": "Thompson Sampling"})
 ```
 
 ## Advanced: Path Configuration
